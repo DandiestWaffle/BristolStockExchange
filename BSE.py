@@ -169,7 +169,7 @@ class Orderbook_half:
                                 self.best_price = max(self.lob.keys())
                             else:
                                 self.best_price = min(self.lob.keys())
-                            self.lob_depth = len(self.lob.keys())
+                            self.lob_depth = len(self.lob)
                         else:
                                 self.best_price = self.worstprice
                                 self.lob_depth = 0
@@ -708,7 +708,7 @@ def trade_stats(expid, traders, dumpfile, time, lob):
         n_traders = len(traders)
         for t in traders:
                 ttype = traders[t].ttype
-                if ttype in trader_types.keys():
+                if ttype in trader_types:
                         t_balance = trader_types[ttype]['balance_sum'] + traders[t].balance
                         n = trader_types[ttype]['n'] + 1
                 else:
@@ -1182,7 +1182,7 @@ if __name__ == "__main__":
                                                        ('ZIC', trdr_3_n), ('ZIP', trdr_4_n)]
                                         sellers_spec = buyers_spec
                                         traders_spec = {'sellers':sellers_spec, 'buyers':buyers_spec}
-                                        print buyers_spec
+                                        print(buyers_spec)
                                         trial = 1
                                         while trial <= n_trials_per_ratio:
                                                 trial_id = 'trial%07d' % trialnumber
@@ -1196,6 +1196,6 @@ if __name__ == "__main__":
                 trdr_1_n += 1
         tdump.close()
         
-        print trialnumber
+        print(trialnumber)
 
 
