@@ -348,7 +348,7 @@ class Trader:
         def bookkeep(self, trade, order, verbose):
 
                 outstr = '%s (%s) bookkeeping: orders=' % (self.tid, self.ttype)
-                for order in self.orders: outstr = outstr + str(order)
+                for o in self.orders: outstr = outstr + str(o)
 
                 self.blotter.append(trade)  # add trade record to trader's blotter
                 # NB What follows is **LAZY** -- assumes all orders are quantity=1
@@ -945,7 +945,7 @@ def customer_orders(time, last_update, traders, trader_stats, os, pending, verbo
                                 schedrange = sched['ranges']
                                 mode = sched['stepmode']
                                 got_one = True
-                                exit  # jump out the loop -- so the first matching timezone has priority over any others
+                                break  # jump out the loop -- so the first matching timezone has priority over any others
                 if not got_one:
                         sys.exit('Fail: time=%5.2f not within any timezone in os=%s' % (time, os))
                 return (schedrange, mode)
