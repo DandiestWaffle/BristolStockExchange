@@ -1073,11 +1073,11 @@ def market_session(sess_id, starttime, endtime, trader_spec, order_schedule, dum
 
 
         # end of an experiment -- dump the tape
-        exchange.tape_dump('transactions.csv', 'w', 'keep')
+        #exchange.tape_dump('transactions.csv', 'w', 'keep')
 
 
         # write trade_stats for this experiment NB end-of-session summary only
-        trade_stats(sess_id, traders, tdump, time, exchange.publish_lob(time, lob_verbose))
+        #trade_stats(sess_id, traders, tdump, time, exchange.publish_lob(time, lob_verbose))
 
 
 
