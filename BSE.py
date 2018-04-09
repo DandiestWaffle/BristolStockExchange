@@ -600,7 +600,7 @@ class Trader_ZIP(Trader):
                 if lob_best_bid_p != None:
                         # non-empty bid LOB
                         lob_best_bid_q = lob['bids']['lob'][-1][1]
-                        if self.prev_best_bid_p < lob_best_bid_p :
+                        if self.prev_best_bid_p is None or self.prev_best_bid_p < lob_best_bid_p :
                                 # best bid has improved
                                 # NB doesn't check if the improvement was by self
                                 bid_improved = True
@@ -619,7 +619,7 @@ class Trader_ZIP(Trader):
                 if lob_best_ask_p != None:
                         # non-empty ask LOB
                         lob_best_ask_q = lob['asks']['lob'][0][1]
-                        if self.prev_best_ask_p > lob_best_ask_p :
+                        if self.prev_best_ask_p is None or self.prev_best_ask_p > lob_best_ask_p :
                                 # best ask has improved -- NB doesn't check if the improvement was by self
                                 ask_improved = True
                         elif trade != None and ((self.prev_best_ask_p < lob_best_ask_p) or ((self.prev_best_ask_p == lob_best_ask_p) and (self.prev_best_ask_q > lob_best_ask_q))):
