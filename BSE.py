@@ -1004,21 +1004,16 @@ def customer_orders(time, last_update, traders, trader_stats, os, pending, verbo
 
 
 # one session in the market
-def market_session(sess_id, starttime, endtime, trader_spec, order_schedule, dumpfile, dump_each_trade):
+def market_session(sess_id, starttime, endtime, traders, trader_stats, order_schedule, dump_each_trade):
 
 
         # initialise the exchange
         exchange = Exchange()
 
 
-        # create a bunch of traders
-        traders = {}
-        trader_stats = populate_market(trader_spec, traders, True, True)
-
-
         # timestep set so that can process all traders in one second
         # NB minimum interarrival time of customer orders may be much less than this!! 
-        timestep = 1.0 / float(trader_stats['n_buyers'] + trader_stats['n_sellers'])
+        timestep = 1.0 / float(len(traders))
         
         duration = float(endtime - starttime)
 
@@ -1186,8 +1181,13 @@ if __name__ == "__main__":
                                         trial = 1
                                         while trial <= n_trials_per_ratio:
                                                 trial_id = 'trial%07d' % trialnumber
-                                                market_session(trial_id, start_time, end_time, traders_spec,
-                                                               order_sched, tdump, False)
+
+
+                                                # create a bunch of traders
+                                                traders = {}
+                                                trader_stats = populate_market(traders_spec, traders, True, True)
+                                                market_session(trial_id, start_time, end_time, traders, trader_stats,
+                                                               order_sched, False)
                                                 tdump.flush()
                                                 trial = trial + 1
                                                 trialnumber = trialnumber + 1
